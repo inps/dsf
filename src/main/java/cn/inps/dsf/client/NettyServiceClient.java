@@ -10,7 +10,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 
-import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -54,8 +53,8 @@ public class NettyServiceClient {
             });
 
             // Start the client.
-            //ChannelFuture f = b.connect(new InetSocketAddress(host, port),new InetSocketAddress(NettyConstants.LOCAL_HOST, NettyConstants.LOCAL_PORT)).sync(); // (5)
-            ChannelFuture f = b.connect(NettyConstants.LOCAL_HOST, NettyConstants.LOCAL_PORT).sync(); // (5)
+            //ChannelFuture f = b.connect(new InetSocketAddress(host, port),new InetSocketAddress(NettyConstants.CLIENT_PORT, NettyConstants.CLIENT_PORT)).sync(); // (5)
+            ChannelFuture f = b.connect(NettyConstants.CLIENT_HOST, NettyConstants.CLIENT_PORT).sync(); // (5)
             // Wait until the connection is closed.
             f.channel().closeFuture().sync();
         } finally {
@@ -69,8 +68,8 @@ public class NettyServiceClient {
 					try {
 						TimeUnit.SECONDS.sleep(5);
 						try {
-							// ��������
-							connect(NettyConstants.REMOTE_HOST,NettyConstants.REMOTE_PORT);
+
+							connect(NettyConstants.SERVER_HOST,NettyConstants.SERVER_PORT);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -95,6 +94,6 @@ public class NettyServiceClient {
          * @throws Exception
          */
         public static void main(String[] args) throws Exception {
-        	new NettyServiceClient().connect(NettyConstants.REMOTE_HOST,NettyConstants.REMOTE_PORT);
+        	new NettyServiceClient().connect(NettyConstants.SERVER_HOST,NettyConstants.SERVER_PORT);
         }
 }

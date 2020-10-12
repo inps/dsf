@@ -44,7 +44,7 @@ public class NettyServiceServer {
              //.childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
             // Bind and start to accept incoming connections.
-            ChannelFuture f = b.bind(NettyConstants.REMOTE_HOST, NettyConstants.REMOTE_PORT).sync(); // (7)
+            ChannelFuture f = b.bind(NettyConstants.SERVER_HOST, NettyConstants.SERVER_PORT).sync(); // (7)
 
             // Wait until the server socket is closed.
             // In this example, this does not happen, but you can do that to gracefully
